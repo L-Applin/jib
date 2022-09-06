@@ -13,4 +13,4 @@ mvn clean install
 ```
 
 ### maven central
-_soming soon_
+_coming soon_
