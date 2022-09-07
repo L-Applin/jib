@@ -1,15 +1,20 @@
 package ca.applin.jib.utils;
 
+import static java.util.Objects.isNull;
+
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
-
-import static java.util.Objects.isNull;
 
 /** Use this instead of {@code null} references! */
 public sealed interface Maybe<T> extends Serializable
@@ -111,6 +116,10 @@ public sealed interface Maybe<T> extends Serializable
 
     default boolean eq(T other) {
         return test(e -> e.equals(other));
+    }
+
+    default <E extends RuntimeException> T orElseThrow(Supplier<E> exceptionSupplier) {
+        return orElseThrow(exceptionSupplier.get());
     }
 
     // helper interfaces to allow catching checked expection and throwing them as unchecked
